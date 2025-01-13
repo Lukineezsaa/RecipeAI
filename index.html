@@ -5,273 +5,200 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecipeAI</title>
     <style>
+        /* Global styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            background: linear-gradient(135deg, #f5f5f5, #d9d9f3);
+            color: #333;
         }
         header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 1rem;
+            background-color: #6c63ff;
+            color: #fff;
+            padding: 20px;
             text-align: center;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
         }
-        nav {
-            background-color: #333;
-            overflow: hidden;
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            animation: slideIn 1.5s ease-out;
         }
-        nav a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-        nav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
+
+        /* Main container */
         .container {
-            padding: 2rem;
-            text-align: center;
+            margin: 20px auto;
+            max-width: 1200px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-in;
         }
-        .button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 1rem 2rem;
-            margin: 1rem;
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Ingredient styles */
+        .category {
+            margin: 20px 0;
+        }
+        .category h3 {
+            color: #6c63ff;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .ingredients {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .ingredient {
+            padding: 10px 15px;
+            background: #f3f3f3;
+            border: 2px solid #ccc;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        .ingredient:hover {
+            background: #6c63ff;
+            color: #fff;
+            transform: scale(1.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .ingredient.selected {
+            background: #6c63ff;
+            color: #fff;
+            border: 2px solid #4e46c2;
+        }
+
+        /* Animation keyframes */
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Button styles */
+        .btn-find {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 30px;
+            background: #6c63ff;
+            color: #fff;
+            font-size: 1.2rem;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
+            transition: background 0.3s ease;
         }
-        .button:hover {
-            background-color: #45a049;
-        }
-        .form-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 2rem 0;
-        }
-        .form-section input, .form-section select {
-            margin: 0.5rem;
-            padding: 0.5rem;
-            font-size: 1rem;
-        }
-        .ingredients {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .ingredient {
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-        }
-        .ingredient.selected {
-            background-color: #4CAF50;
-            color: white;
+        .btn-find:hover {
+            background: #4e46c2;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>RecipeAI</h1>
-        <p>Your personalized recipe assistant</p>
+        <h1>Welcome to RecipeAI</h1>
     </header>
 
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#search">Find Recipes</a>
-    </nav>
+    <div class="container">
+        <h2>Select Your Ingredients</h2>
 
-    <div id="home" class="container">
-        <h2>Welcome to RecipeAI</h2>
-        <p>Discover recipes tailored to your ingredients, time, and cooking preferences.</p>
-        <button class="button" onclick="document.location='#search'">Start Searching</button>
-    </div>
-
-    <div id="about" class="container">
-        <h2>About Us</h2>
-        <p>RecipeAI is your ultimate cooking companion, offering recipes customized to your needs. 
-           Whether you're a beginner or an expert chef, we've got you covered!</p>
-    </div>
-
-    <div id="search" class="container">
-        <h2>Find Recipes</h2>
-        <form>
-            <div class="form-section">
-                <label for="time">Select Time:</label>
-                <select id="time">
-                    <option value="10-30">10-30 minutes</option>
-                    <option value="30-60">30-60 minutes</option>
-                    <option value="60+">60+ minutes</option>
-                </select>
-
-                <label for="difficulty">Select Difficulty:</label>
-                <select id="difficulty">
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
-                </select>
-
-                <label for="search-ingredient">Search Ingredients:</label>
-                <input type="text" id="search-ingredient" placeholder="Search for an ingredient">
+        <!-- Vegetables -->
+        <div class="category">
+            <h3>Vegetables</h3>
+            <div class="ingredients">
+                <div class="ingredient">Tomato</div>
+                <div class="ingredient">Onion</div>
+                <div class="ingredient">Garlic</div>
+                <div class="ingredient">Carrot</div>
+                <div class="ingredient">Potato</div>
+                <div class="ingredient">Spinach</div>
+                <div class="ingredient">Broccoli</div>
+                <div class="ingredient">Zucchini</div>
+                <div class="ingredient">Cauliflower</div>
+                <div class="ingredient">Cucumber</div>
+                <div class="ingredient">Eggplant</div>
+                <div class="ingredient">Peas</div>
             </div>
+        </div>
 
-            <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RecipeAI Ingredients</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h2 {
-            text-align: center;
-        }
-        .category {
-            margin: 20px 0;
-        }
-        .ingredient {
-            margin: 5px;
-            display: inline-block;
-            padding: 8px 12px;
-            background-color: #f3f3f3;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-    </style>
-</head>
-<body>
-    <h2>RecipeAI - Choose Your Ingredients</h2>
-
-    <!-- Vegetables -->
-    <div class="category">
-        <h3>Vegetables</h3>
-        <div class="ingredient">Tomato</div>
-        <div class="ingredient">Onion</div>
-        <div class="ingredient">Garlic</div>
-        <div class="ingredient">Carrot</div>
-        <div class="ingredient">Potato</div>
-        <div class="ingredient">Spinach</div>
-        <div class="ingredient">Broccoli</div>
-        <div class="ingredient">Zucchini</div>
-        <div class="ingredient">Cauliflower</div>
-        <div class="ingredient">Cucumber</div>
-        <div class="ingredient">Eggplant</div>
-        <div class="ingredient">Peas</div>
-    </div>
-
-    <!-- Fruits -->
-    <div class="category">
-        <h3>Fruits</h3>
-        <div class="ingredient">Apple</div>
-        <div class="ingredient">Banana</div>
-        <div class="ingredient">Orange</div>
-        <div class="ingredient">Lemon</div>
-        <div class="ingredient">Mango</div>
-        <div class="ingredient">Strawberry</div>
-        <div class="ingredient">Blueberry</div>
-        <div class="ingredient">Pineapple</div>
-        <div class="ingredient">Grape</div>
-        <div class="ingredient">Watermelon</div>
-        <div class="ingredient">Peach</div>
-    </div>
-
-    <!-- Meats -->
-    <div class="category">
-        <h3>Meats</h3>
-        <div class="ingredient">Chicken</div>
-        <div class="ingredient">Beef</div>
-        <div class="ingredient">Pork</div>
-        <div class="ingredient">Turkey</div>
-        <div class="ingredient">Lamb</div>
-        <div class="ingredient">Fish</div>
-        <div class="ingredient">Salmon</div>
-        <div class="ingredient">Tuna</div>
-        <div class="ingredient">Shrimp</div>
-        <div class="ingredient">Crab</div>
-        <div class="ingredient">Duck</div>
-    </div>
-
-    <!-- Grains & Legumes -->
-    <div class="category">
-        <h3>Grains & Legumes</h3>
-        <div class="ingredient">Rice</div>
-        <div class="ingredient">Wheat</div>
-        <div class="ingredient">Quinoa</div>
-        <div class="ingredient">Oats</div>
-        <div class="ingredient">Barley</div>
-        <div class="ingredient">Lentils</div>
-        <div class="ingredient">Chickpeas</div>
-        <div class="ingredient">Kidney Beans</div>
-        <div class="ingredient">Black Beans</div>
-        <div class="ingredient">Peanuts</div>
-    </div>
-
-    <!-- Spices & Condiments -->
-    <div class="category">
-        <h3>Spices & Condiments</h3>
-        <div class="ingredient">Salt</div>
-        <div class="ingredient">Pepper</div>
-        <div class="ingredient">Cinnamon</div>
-        <div class="ingredient">Cumin</div>
-        <div class="ingredient">Paprika</div>
-        <div class="ingredient">Turmeric</div>
-        <div class="ingredient">Ginger</div>
-        <div class="ingredient">Soy Sauce</div>
-        <div class="ingredient">Vinegar</div>
-        <div class="ingredient">Honey</div>
-        <div class="ingredient">Olive Oil</div>
-    </div>
-
-    <!-- Others -->
-    <div class="category">
-        <h3>Others</h3>
-        <div class="ingredient">Milk</div>
-        <div class="ingredient">Cheese</div>
-        <div class="ingredient">Butter</div>
-        <div class="ingredient">Yogurt</div>
-        <div class="ingredient">Eggs</div>
-        <div class="ingredient">Sugar</div>
-        <div class="ingredient">Flour</div>
-        <div class="ingredient">Baking Powder</div>
-        <div class="ingredient">Chocolate</div>
-        <div class="ingredient">Coffee</div>
-        <div class="ingredient">Tea</div>
-    </div>
-</body>
-</html>
+        <!-- Fruits -->
+        <div class="category">
+            <h3>Fruits</h3>
+            <div class="ingredients">
+                <div class="ingredient">Apple</div>
+                <div class="ingredient">Banana</div>
+                <div class="ingredient">Orange</div>
+                <div class="ingredient">Lemon</div>
+                <div class="ingredient">Mango</div>
+                <div class="ingredient">Strawberry</div>
+                <div class="ingredient">Blueberry</div>
+                <div class="ingredient">Pineapple</div>
+                <div class="ingredient">Grape</div>
+                <div class="ingredient">Watermelon</div>
+                <div class="ingredient">Peach</div>
             </div>
+        </div>
 
-            <button type="button" class="button" onclick="findRecipes()">Find Recipes</button>
-        </form>
+        <!-- Spices -->
+        <div class="category">
+            <h3>Spices & Condiments</h3>
+            <div class="ingredients">
+                <div class="ingredient">Salt</div>
+                <div class="ingredient">Pepper</div>
+                <div class="ingredient">Cinnamon</div>
+                <div class="ingredient">Cumin</div>
+                <div class="ingredient">Paprika</div>
+                <div class="ingredient">Turmeric</div>
+                <div class="ingredient">Ginger</div>
+                <div class="ingredient">Soy Sauce</div>
+                <div class="ingredient">Vinegar</div>
+                <div class="ingredient">Honey</div>
+                <div class="ingredient">Olive Oil</div>
+            </div>
+        </div>
+
+        <button class="btn-find">Find Recipes</button>
     </div>
 
     <script>
-        // Toggle ingredient selection
-        document.querySelectorAll('.ingredient').forEach(item => {
-            item.addEventListener('click', () => {
-                item.classList.toggle('selected');
+        // JavaScript for interactivity
+        document.querySelectorAll('.ingredient').forEach(ingredient => {
+            ingredient.addEventListener('click', () => {
+                ingredient.classList.toggle('selected'); // Toggle selection
             });
         });
 
-        // Simulate recipe finding
-        function findRecipes() {
-            alert('Searching for recipes based on your selection...');
-            // Here, you would implement the logic to fetch recipes from the backend
-        }
+        document.querySelector('.btn-find').addEventListener('click', () => {
+            const selectedIngredients = Array.from(document.querySelectorAll('.ingredient.selected')).map(
+                el => el.textContent
+            );
+            alert('You selected: ' + selectedIngredients.join(', '));
+        });
     </script>
 </body>
 </html>
