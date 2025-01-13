@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecipeAI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .container {
+            padding: 2rem;
+            text-align: center;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            margin: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2rem 0;
+        }
+        .form-section input, .form-section select {
+            margin: 0.5rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+        .ingredients {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .ingredient {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .ingredient.selected {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>RecipeAI</h1>
+        <p>Your personalized recipe assistant</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#search">Find Recipes</a>
+    </nav>
+
+    <div id="home" class="container">
+        <h2>Welcome to RecipeAI</h2>
+        <p>Discover recipes tailored to your ingredients, time, and cooking preferences.</p>
+        <button class="button" onclick="document.location='#search'">Start Searching</button>
+    </div>
+
+    <div id="about" class="container">
+        <h2>About Us</h2>
+        <p>RecipeAI is your ultimate cooking companion, offering recipes customized to your needs. 
+           Whether you're a beginner or an expert chef, we've got you covered!</p>
+    </div>
+
+    <div id="search" class="container">
+        <h2>Find Recipes</h2>
+        <form>
+            <div class="form-section">
+                <label for="time">Select Time:</label>
+                <select id="time">
+                    <option value="10-30">10-30 minutes</option>
+                    <option value="30-60">30-60 minutes</option>
+                    <option value="60+">60+ minutes</option>
+                </select>
+
+                <label for="difficulty">Select Difficulty:</label>
+                <select id="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+
+                <label for="search-ingredient">Search Ingredients:</label>
+                <input type="text" id="search-ingredient" placeholder="Search for an ingredient">
+            </div>
+
+            <div class="ingredients">
+                <!-- Example ingredients -->
+                <div class="ingredient">Tomato</div>
+                <div class="ingredient">Onion</div>
+                <div class="ingredient">Chicken</div>
+                <div class="ingredient">Garlic</div>
+                <div class="ingredient">Carrot</div>
+                <!-- Add more dynamically if needed -->
+            </div>
+
+            <button type="button" class="button" onclick="findRecipes()">Find Recipes</button>
+        </form>
+    </div>
+
+    <script>
+        // Toggle ingredient selection
+        document.querySelectorAll('.ingredient').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('selected');
+            });
+        });
+
+        // Simulate recipe finding
+        function findRecipes() {
+            alert('Searching for recipes based on your selection...');
+            // Here, you would implement the logic to fetch recipes from the backend
+        }
+    </script>
+</body>
+</html>
